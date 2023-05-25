@@ -188,6 +188,8 @@ class ImageEditor(ctk.CTk):
                                            font="Arial 12 bold", foreground="white", bd=0, background="black", command = self.activate_download)
         
         self.url_entry = tk.Entry(self, font = "Arial 12 bold", cursor="xterm")
+
+        self.listbox = tk.Listbox(self, width = 25, height = 15, bg = "black", fg = "white", font= "arial 14 bold")
         
         self.download_bt = tk.Button(self, text="Download", foreground="white", 
                                 font="Arial 12 bold", background="black", cursor="hand2", bd = 0, command = self.download_image)
@@ -235,6 +237,7 @@ class ImageEditor(ctk.CTk):
             self.crop_bt.place(x = 1920 - 150, y = 200)
             self.reset_bt.place(x = 1920 - 200, y = 350)
             self.text_bt.place(x = 1920 - 200, y = 150)
+            self.listbox.place(x = 85, y = 200)
             self.download_image_button.place(x = 1920 - 250, y = 800)
 
             filename = file_object.name
@@ -246,6 +249,10 @@ class ImageEditor(ctk.CTk):
                 if '.jpg' in file or '.png' in file or '.JPG' in file or '.JPEG' in file or '.PNG' in file:
                     self.image_paths.append(os.path.join(directory, file))
 
+            for file in files_list:
+                if '.jpg' in file or '.png' in file or '.JPG' in file or '.JPEG' in file or '.PNG' in file:
+                    self.listbox.insert('end', file)
+            
             for i, image in enumerate(self.image_paths):
                 if image == filename:
                     self.current_index = i
